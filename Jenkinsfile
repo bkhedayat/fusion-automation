@@ -13,20 +13,18 @@ pipeline {
             steps {
                 echo "🚀 Deploying Fusion 360 script..."
                 sh '''
-                TARGET="/Users/babak/Library/Application Support/Autodesk/Fusion 360/API/Scripts/test/DrawShapesAutoRun"
-
+                TARGET="$HOME/Library/Application Support/Autodesk/Fusion 360/API/AddIns/DrawShapesAutoRun"
                 echo "📁 Ensuring target directory exists..."
                 mkdir -p "$TARGET"
-
-                echo "📦 Copying script files to Fusion API folder..."
-                cp DrawShapesAutoRun/DrawShapesAutoRun.py DrawShapesAutoRun/manifest.json "$TARGET/"
+                echo "📦 Copying script files to Add-In folder..."
+                cp DrawShapesAutoRun.py manifest.json "$TARGET/"
                 '''
             }
         }
 
         stage('Done') {
             steps {
-                echo "✅ Fusion script deployed to Scripts/test/DrawShapesAutoRun"
+                echo "✅ Fusion Add-In deployed. Restart Fusion to auto-run."
             }
         }
     }
